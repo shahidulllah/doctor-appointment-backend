@@ -13,7 +13,8 @@ export const authenticate = (
 ) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ error: "Unauthorized" });
+    return;
   }
 
   const token = authHeader.split(" ")[1];
@@ -25,7 +26,8 @@ export const authenticate = (
     (req as any).user = decoded; // attach to request
     next();
   } catch (err) {
-    return res.status(401).json({ error: "Invalid token" });
+    res.status(401).json({ error: "Invalid token" });
+    return;
   }
 };
 
@@ -36,7 +38,8 @@ export const requireDoctor = (
 ) => {
   const user = (req as any).user;
   if (user?.role !== "doctor") {
-    return res.status(403).json({ error: "Access denied: Doctors only" });
+    res.status(403).json({ error: "Access denied: Doctors only" });
+    return;
   }
   next();
 };

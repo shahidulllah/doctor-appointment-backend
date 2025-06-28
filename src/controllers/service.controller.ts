@@ -34,7 +34,10 @@ export const updateService = async (req: Request, res: Response) => {
       { new: true }
     );
 
-    if (!service) return res.status(404).json({ error: "Service not found" });
+    if (!service) {
+      res.status(404).json({ error: "Service not found" });
+      return;
+    }
 
     res.json({ message: "Service updated", service });
   } catch (error) {
@@ -53,7 +56,10 @@ export const deleteService = async (req: Request, res: Response) => {
       doctorId,
     });
 
-    if (!result) return res.status(404).json({ error: "Service not found" });
+    if (!result) {
+      res.status(404).json({ error: "Service not found" });
+      return;
+    }
 
     res.json({ message: "Service deleted" });
   } catch (error) {

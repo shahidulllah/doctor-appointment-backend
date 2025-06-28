@@ -1,7 +1,7 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface IService extends Document {
-  doctorId: string;
+  doctorId: Types.ObjectId;
   title: string;
   description: string;
   price: number;
