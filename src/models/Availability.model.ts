@@ -1,11 +1,6 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { IAvailability } from "../types/availability.type";
 
-export interface IAvailability extends Document {
-  doctorId: Types.ObjectId;
-  serviceId: Types.ObjectId;
-  day: string; 
-  slots: string[]; 
-}
 
 const AvailabilitySchema = new Schema<IAvailability>(
   {
