@@ -18,7 +18,6 @@ A REST API for managing appointments between doctors and patients, built with No
 - Express.js
 - TypeScript
 - MongoDB + Mongoose
-- Zod (for validation)
 - JWT (Authentication)
 - bcryptjs (Password Hashing)
 
