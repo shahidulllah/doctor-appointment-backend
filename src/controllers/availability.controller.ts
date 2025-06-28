@@ -16,10 +16,11 @@ export const setAvailability = async (req: Request, res: Response) => {
     if (existing) {
       existing.slots = slots;
       await existing.save();
-      return res.json({
+      res.json({
         message: "Availability updated",
         availability: existing,
       });
+      return;
     }
 
     const newAvailability = await AvailabilityModel.create({
@@ -60,7 +61,10 @@ export const deleteAvailability = async (req: Request, res: Response) => {
       _id: id,
       doctorId,
     });
-    if (!result) return res.status(404).json({ error: "Not found" });
+    if (!result) {
+      res.status(404).json({ error: "Not found" });
+      return;
+    }
 
     res.json({ message: "Availability deleted" });
   } catch (error) {
