@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes";
 import serviceRoutes from "./routes/service.route";
 import availabilityRoutes from "./routes/availability.routes";
+import doctorAppointmentRoutes from "./routes/doctorAppointment.routes";
 
 export const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/doctor/services", serviceRoutes);
 app.use("/doctor/availability", availabilityRoutes);
+app.use("/doctor/appointments", doctorAppointmentRoutes);
 
 //Checking
 app.get("/", (req, res) => {
