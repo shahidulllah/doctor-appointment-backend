@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.routes";
 import serviceRoutes from "./routes/service.route";
 import availabilityRoutes from "./routes/availability.routes";
 import doctorAppointmentRoutes from "./routes/doctorAppointment.routes";
+import patientRoutes from "./routes/patient.routes";
 
 export const app = express();
 
@@ -15,6 +16,7 @@ app.use("/auth", authRoutes);
 app.use("/doctor/services", serviceRoutes);
 app.use("/doctor/availability", availabilityRoutes);
 app.use("/doctor/appointments", doctorAppointmentRoutes);
+app.use("/patient", patientRoutes);
 
 //Checking
 app.get("/", (req, res) => {
