@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AppointmentModel } from "../models/Appointment.model";
 import { AvailabilityModel } from "../models/Availability.model";
+import { sendMockEmail } from "../utils/email.util";
 
 export const bookAppointment = async (req: Request, res: Response) => {
   try {
@@ -45,6 +46,12 @@ export const bookAppointment = async (req: Request, res: Response) => {
     });
 
     res.status(201).json({ message: "Appointment requested", appointment });
+
+    sendMockEmail(
+      "admin@gmail.com",
+      "New Appointment Request",
+      `Doctor ID: ${doctorId}, Patient ID: ${patientId}`
+    );
   } catch (error) {
     res.status(500).json({ error: "Failed to book appointment" });
   }

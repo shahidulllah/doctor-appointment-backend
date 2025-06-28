@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { AppointmentModel } from "../models/Appointment.model";
+import { sendMockEmail } from "../utils/email.util";
 
 // Get all appointments (filter by status)
 export const getAppointments = async (req: Request, res: Response) => {
@@ -43,6 +44,12 @@ export const updateAppointmentStatus = async (req: Request, res: Response) => {
       return;
     }
     res.json({ message: "Appointment updated", appointment });
+
+    sendMockEmail(
+      "patient@gmail.com",
+      "Appointment Accepted",
+      "Your appointment has been accepted."
+    );
   } catch (error) {
     res.status(500).json({ error: "Failed to update appointment status" });
   }
