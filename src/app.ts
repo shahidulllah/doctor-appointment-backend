@@ -6,6 +6,7 @@ import availabilityRoutes from "./routes/availability.routes";
 import appointmentRoutes from "./routes/appointment.routes";
 import doctorAppointmentRoutes from "./routes/doctorAppointment.routes";
 import patientRoutes from "./routes/patient.routes";
+import adminRoutes from "./routes/admin.routes";
 
 export const app = express();
 
@@ -19,6 +20,7 @@ app.use("/appointments", appointmentRoutes);
 app.use("/doctor/availability", availabilityRoutes);
 app.use("/doctor/appointments", doctorAppointmentRoutes);
 app.use("/patient", patientRoutes);
+app.use("/admin", adminRoutes);
 
 //Checking
 app.get("/", (req, res) => {
