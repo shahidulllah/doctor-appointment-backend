@@ -31,3 +31,18 @@ export const getAllDoctors = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to fetch doctors" });
   }
 };
+
+// Get doctor by ID with services + availability
+export const getDoctorDetails = async (req: Request, res: Response) => {
+  try {
+    const doctorId = req.params.id;
+
+    const doctor = await UserModel.findById(doctorId).select("-password");
+    const services = await ServiceModel.find({ doctorId });
+    const availability = await AvailabilityModel.find({ doctorId });
+
+    res.json({ doctor, services, availability });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get doctor profile" });
+  }
+};
