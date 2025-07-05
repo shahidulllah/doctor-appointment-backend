@@ -103,3 +103,31 @@ export const addReview = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to submit review" });
   }
 };
+
+//Adding doctor note
+export const addDoctorNote = async (req: Request, res: Response) => {
+  try {
+    const doctorId = (req as any).user.userId;
+    const { id } = req.params; // appointment ID
+    const { note } = req.body;
+
+    const appointment = await AppointmentModel.findOne({
+      _id: id,
+      doctorId,
+      status: "completed",
+    });
+
+    if (!appointment) {
+      return res
+        .status(404)
+        .json({ error: "Completed appointment not found or not yours" });
+    }
+
+    appointment.doctorNote = note;
+    await appointment.save();
+
+    res.json({ message: "Doctor note added", appointment });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to add note" });
+  }
+};
