@@ -86,13 +86,15 @@ export const addReview = async (req: Request, res: Response) => {
     });
 
     if (!appointment) {
-      return res
+      res
         .status(404)
         .json({ error: "Completed appointment not found or not yours" });
+      return;
     }
 
     if (appointment.review?.rating) {
-      return res.status(400).json({ error: "Review already submitted" });
+      res.status(400).json({ error: "Review already submitted" });
+      return;
     }
 
     appointment.review = { rating, comment };
@@ -118,9 +120,10 @@ export const addDoctorNote = async (req: Request, res: Response) => {
     });
 
     if (!appointment) {
-      return res
+      res
         .status(404)
         .json({ error: "Completed appointment not found or not yours" });
+      return;
     }
 
     appointment.doctorNote = note;
