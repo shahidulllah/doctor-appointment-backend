@@ -76,7 +76,7 @@ export const getPatientAppointments = async (req: Request, res: Response) => {
 export const addReview = async (req: Request, res: Response) => {
   try {
     const patientId = (req as any).user.userId;
-    const { id } = req.params; // appointment ID
+    const { id } = req.params;
     const { rating, comment } = req.body;
 
     const appointment = await AppointmentModel.findOne({
@@ -102,6 +102,7 @@ export const addReview = async (req: Request, res: Response) => {
 
     res.json({ message: "Review submitted", appointment });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Failed to submit review" });
   }
 };
