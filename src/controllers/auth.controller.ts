@@ -80,7 +80,14 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const token = generateToken(user._id, user.role);
-    res.status(200).json({ token, role: user.role, userId: user._id });
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
+      })
+      .json({ role: user.role, userId: user._id });
   } catch (error) {
     res.status(500).json({ error: "Login failed" });
   }
