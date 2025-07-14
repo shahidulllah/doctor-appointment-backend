@@ -92,3 +92,19 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Login failed" });
   }
 };
+
+export const getCurrentUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = (req as any).user;
+
+    const user = await UserModel.findById(userId).select("name email role");
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch user info" });
+  }
+};
