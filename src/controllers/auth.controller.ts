@@ -100,7 +100,8 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     const user = await UserModel.findById(userId).select("name email role");
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      res.status(404).json({ error: "User not found" });
+      return;
     }
 
     res.status(200).json(user);
