@@ -4,10 +4,11 @@ import {
   bookAppointment,
   getPatientAppointments,
 } from "../controllers/appointment.controller";
-import { addReview, addDoctorNote } from "../controllers/appointment.controller";
+import {
+  addReview,
+  addDoctorNote,
+} from "../controllers/appointment.controller";
 import { requireDoctor, requirePatient } from "../middlewares/auth.middleware";
-
-
 
 const router = express.Router();
 
